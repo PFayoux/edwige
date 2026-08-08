@@ -1,0 +1,92 @@
+[
+  {
+    "id": "dragon_composte",
+    "nom": "Dragon de Composte",
+    "palier": 1,
+    "pv": 180,
+    "defense": 85,
+    "attaque": 85,
+    "particularite": "Boss \"équilibré\" de référence",
+    "traits": []
+  },
+  {
+    "id": "golem_feuilles_mortes",
+    "nom": "Golem de Feuilles Mortes",
+    "palier": 1,
+    "pv": 230,
+    "defense": 40,
+    "attaque": 18,
+    "particularite": "Archétype Tank — PV très élevé, Attaque faible. Combat long mais peu risqué.",
+    "traits": []
+  },
+  {
+    "id": "herisson_blinde",
+    "nom": "Hérisson Blindé",
+    "palier": 1,
+    "pv": 135,
+    "defense": 65,
+    "attaque": 40,
+    "particularite": "Archétype Défensif — Défense très élevée, bloque beaucoup d'attaques et prolonge le combat.",
+    "traits": []
+  },
+  {
+    "id": "boss_palier2_placeholder_a",
+    "nom": "[Palier 2 — à créer A]",
+    "palier": 2,
+    "pv": 200,
+    "defense": 90,
+    "attaque": 90,
+    "particularite": "Placeholder — contenu réel non défini (issue #17/#20, hors scope de la spec technique #21). Stats dans la bande qualitative palier 2.",
+    "traits": []
+  },
+  {
+    "id": "boss_palier2_placeholder_b",
+    "nom": "[Palier 2 — à créer B]",
+    "palier": 2,
+    "pv": 200,
+    "defense": 90,
+    "attaque": 90,
+    "particularite": "Placeholder — contenu réel non défini (issue #17/#20, hors scope de la spec technique #21). Stats dans la bande qualitative palier 2.",
+    "traits": []
+  },
+  {
+    "id": "boss_palier2_placeholder_c",
+    "nom": "[Palier 2 — à créer C]",
+    "palier": 2,
+    "pv": 200,
+    "defense": 90,
+    "attaque": 90,
+    "particularite": "Placeholder — contenu réel non défini (issue #17/#20, hors scope de la spec technique #21). Stats dans la bande qualitative palier 2.",
+    "traits": []
+  },
+  {
+    "id": "boss_palier3_placeholder_a",
+    "nom": "[Palier 3 — à créer A]",
+    "palier": 3,
+    "pv": 220,
+    "defense": 95,
+    "attaque": 95,
+    "particularite": "Placeholder — contenu réel non défini (issue #17/#20, hors scope de la spec technique #21). Stats proches du plafond (95).",
+    "traits": []
+  },
+  {
+    "id": "boss_palier3_placeholder_b",
+    "nom": "[Palier 3 — à créer B]",
+    "palier": 3,
+    "pv": 220,
+    "defense": 95,
+    "attaque": 95,
+    "particularite": "Placeholder — contenu réel non défini (issue #17/#20, hors scope de la spec technique #21). Stats proches du plafond (95).",
+    "traits": []
+  },
+  {
+    "id": "boss_palier3_placeholder_c",
+    "nom": "[Palier 3 — à créer C]",
+    "palier": 3,
+    "pv": 220,
+    "defense": 95,
+    "attaque": 95,
+    "particularite": "Placeholder — contenu réel non défini (issue #17/#20, hors scope de la spec technique #21). Stats proches du plafond (95).",
+    "traits": []
+  }
+]

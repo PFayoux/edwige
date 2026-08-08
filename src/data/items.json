@@ -1,0 +1,6 @@
+[
+  { "id": "bonus_force", "nom": "+3 Force", "categorie": "bonus_stat", "description": "+3 Force" },
+  { "id": "bonus_dexterite", "nom": "+3 Dextérité", "categorie": "bonus_stat", "description": "+3 Dextérité" },
+  { "id": "bonus_pv_max", "nom": "+15 PV max", "categorie": "bonus_stat", "description": "+15 PV max" },
+  { "id": "bonus_chance", "nom": "+5 Chance", "categorie": "bonus_stat", "description": "+5 Chance" }
+]
