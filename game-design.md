@@ -293,7 +293,7 @@ Même structure que Monstre, avec `"type": "boss"` et son propre pool (`min_pali
   "talent": {
     "id": "oeil_de_nuit",
     "nom": "Œil de nuit",
-    "effet": "mulligan_gratuit_1x_par_combat"
+    "effet": "reveal_monster_actions_1x_par_combat"
   }
 }
 ```
