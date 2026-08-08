@@ -2,7 +2,7 @@
 
 ## Concept
 
-Jeu roguelite léger, ambiance humoristique avec des clins d'œil personnels. Le joueur incarne une chouette qui progresse dans un donjon infini, porte après porte, jusqu'à sa mort. Le score final est le nombre de portes franchies.
+Jeu roguelite léger, ambiance humoristique avec des clins d'œil personnels. Le joueur incarne une chouette qui progresse dans un donjon, porte après porte, jusqu'à sa mort — ou jusqu'à sa victoire, en vainquant le boss du palier 3 (porte 30). Le score final est le nombre de portes franchies.
 
 Pas de carte : progression purement linéaire (séquence d'événements).
 
@@ -15,7 +15,9 @@ Pas de carte : progression purement linéaire (séquence d'événements).
 3. Résolution de l'événement (combat, choix, etc.)
 4. Petit heal automatique si combat gagné (10–15% des PV max)
 5. Porte suivante
-6. Le run se termine quand les PV tombent à 0 → écran de fin avec score (nombre de portes) + meilleur score
+6. Le run se termine dans l'un des deux cas suivants :
+   - Les PV tombent à 0 → écran de fin avec score (nombre de portes) + meilleur score (voir Écran de fin de run)
+   - Le boss du palier 3 (porte 30) est vaincu → victoire, écran dédié (voir Écran de victoire)
 
 ---
 
@@ -139,7 +141,12 @@ Après chaque victoire : 1 point à répartir librement (Force / Dextérité / C
 | Malédiction/Autel | 10% | Effet à double tranchant, activable ou non |
 | Marchand/Repos | 5% | Choix entre gros soin (40–50% PV max) ou bonus de stat |
 
-Boss : apparaît tous les 10 portes, tiré depuis un pool séparé du pool "monstres normaux".
+**Boss** : apparaît tous les 10 portes, tiré depuis un pool séparé du pool "monstres normaux". Le système est **paliéré sur 3 niveaux** :
+- Porte 10 → boss tiré du pool **palier 1**
+- Porte 20 → boss tiré du pool **palier 2**
+- Porte 30 → boss tiré du pool **palier 3** — sa défaite déclenche la **victoire** (voir Écran de victoire)
+
+Chaque palier propose **3 boss possibles**, tirés indépendamment à chaque run (pas de mémoire d'un run à l'autre — un même boss peut revenir d'un run au suivant). Voir *Bestiaire de départ* pour le détail des boss par palier.
 
 **Principe clé** : jamais d'effet caché/surprise sur les pièges ou malédictions — le risque et le gain doivent toujours être visibles avant le choix du joueur. L'objectif est d'éviter que le jeu soit un pur jeu de hasard.
 
@@ -223,16 +230,32 @@ Cible de rythme : 2-3 coups pour un monstre facile, 4-5 pour un monstre difficil
 | 3 | Chat de Gouttière Blasé | 90 | 68 | 68 | Attaque "mou" mais régulier |
 | 4 | Corbeau Mystique | 110 | 72 | 72 | Jette un sort (préfigure les traits futurs) |
 | 5 | Renard Rusé | 130 | 78 | 78 | Esquive 1 attaque sur 3 |
-| 6 (boss) | Dragon de Composte | 180 | 85 | 85 | Boss "équilibré" de référence |
 
-Après le palier 6, scaling en boucle (+10% de stats par palier, plafonné à 95 comme pour le joueur) pour le mode infini.
+Après le palier 5, scaling en boucle (+10% de stats par palier, plafonné à 95 comme pour le joueur) pour les rencontres normales — le boss suit désormais son propre système de paliers, voir ci-dessous.
 
-### Archétypes de boss
+### Boss par palier
 
-Au-delà du boss "équilibré" classique, prévoir des variantes pour casser la routine :
+Depuis l'introduction du système de boss paliérés (voir *Types de portes*), le pool de boss n'est plus un pool plat unique mais **3 pools distincts**, un par palier :
+- Porte 10 → boss tiré du pool **palier 1**
+- Porte 20 → boss tiré du pool **palier 2**
+- Porte 30 → boss tiré du pool **palier 3**, dont la défaite déclenche la **victoire** (voir Écran de victoire)
 
-- **Boss Tank** (ex : *Golem de Feuilles Mortes*) — PV très élevé (220+), Attaque faible (15-20). Combat long mais peu risqué, pur test d'endurance.
-- **Boss Défensif** (ex : *Hérisson Blindé*) — PV modéré (120-150), Défense très élevée (60+). Gagne souvent ses confrontations en Défense, ce qui bloque beaucoup d'attaques du joueur et prolonge le combat sans nécessiter énormément de PV.
+Chaque palier propose **3 boss possibles**, tirage indépendant à chaque run (pas de mémoire d'un run à l'autre).
+
+**Calibrage par palier** (qualitatif — les valeurs précises seront ajustées en playtest, comme le reste du bestiaire) :
+- **Palier 1** ≈ calibrage boss existant (~85) — pas de changement nécessaire pour les 3 boss ci-dessous, déjà dans la bonne fourchette
+- **Palier 2** : monte vers la zone que le scaling en boucle (+10%/palier, voir ci-dessus) du bestiaire normal atteindrait un peu plus loin
+- **Palier 3** : le plus dur, proche du plafond de stat existant (95 — même plafond que le joueur)
+
+**Palier 1** (formalisé à partir des esquisses existantes) :
+
+| Boss | PV | Déf | Atq | Particularité |
+|---|---|---|---|---|
+| Dragon de Composte | 180 | 85 | 85 | Boss "équilibré" de référence |
+| Golem de Feuilles Mortes | 220+ | — | 15-20 | Archétype Tank — PV très élevé, Attaque faible. Combat long mais peu risqué, pur test d'endurance |
+| Hérisson Blindé | 120-150 | 60+ | — | Archétype Défensif — Défense très élevée, gagne souvent ses confrontations en Défense, ce qui bloque beaucoup d'attaques du joueur et prolonge le combat sans nécessiter énormément de PV |
+
+**Paliers 2 et 3** : contenu à créer (3 boss chacun), dans la bande de difficulté qualitative ci-dessus — noms, particularités et stats précises pas encore définis.
 
 ---
 
@@ -328,9 +351,25 @@ Déclenché quand les PV du joueur tombent à 0.
 
 ---
 
+## Écran de victoire
+
+Déclenché quand le boss du palier 3 (porte 30) est vaincu. Remplace l'écran de fin de run habituel — le run se termine immédiatement, sans passer par la récompense de victoire normale (le run étant terminé, un choix d'objet ou de point de stat n'aurait plus d'utilité).
+
+**Contenu affiché**
+- Message de victoire générique, ton léger et chaleureux (même registre que l'écran de fin de run, pas de fanfare "YOU WIN !" — texte exact à écrire plus tard)
+- **Récap du build** : stats finales (Force/Dextérité/Charisme/Chance/PV max), objets permanents ramassés pendant le run
+- Bouton **"Rejouer"** → relance directement un nouveau run
+- **Pas de score affiché** : la victoire correspond toujours à 30 portes franchies, l'afficher n'apporterait aucune information. Le **meilleur score** est tout de même mis à jour à 30 en interne, pour rester cohérent avec l'écran titre et les futurs écrans de fin de run par mort.
+
+*(Piste pour plus tard, hors scope ici : un système de score plus élaboré à la Slay the Spire, reflétant la qualité du run plutôt que juste le nombre de portes.)*
+
+---
+
 ## Méta-progression entre les runs
 
 **Version MVP** : pas de progression permanente entre les runs (pas de monnaie, pas de déblocage). Seul élément persistant : le **meilleur score** (nombre de portes franchies), stocké localement et affiché à l'écran titre et à l'écran de fin de run. Chaque run repart avec les stats de base.
+
+Comme la victoire correspond toujours à exactement 30 portes franchies, un meilleur score à 30 signale de façon permanente qu'une victoire a déjà été obtenue — pas besoin d'un indicateur séparé pour l'instant.
 
 **Piste pour plus tard** : achievements personnels (conditions liées à des clins d'œil plutôt que génériques — ex : nombre de portes précis, type de mort particulier, combinaison de choix faits pendant un run). Rien à implémenter maintenant, mais penser le système de sauvegarde du score de façon à pouvoir y ajouter facilement une liste d'achievements débloqués par la suite.
 
@@ -346,3 +385,5 @@ Déclenché quand les PV du joueur tombent à 0.
 ## Reste à faire avant/à côté du code
 
 - Thème/nom final du jeu, univers visuel de la chouette et des monstres
+- Contenu des boss des paliers 2 et 3 (noms, particularités, stats précises — dans la bande de difficulté qualitative définie dans *Bestiaire de départ*)
+- Texte exact du message de l'écran de victoire (le registre/ton est fixé, le texte final reste à écrire)
