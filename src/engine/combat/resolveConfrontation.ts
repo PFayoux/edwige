@@ -121,8 +121,10 @@ export function resolveConfrontation(
   }
 
   return {
-    playerDamageDealt,
-    monsterDamageDealt,
+    // PV/dégâts sont des entiers dans game-design.md — arrondi ici, à la
+    // frontière du moteur, pour que les formules internes restent exactes.
+    playerDamageDealt: Math.round(playerDamageDealt),
+    monsterDamageDealt: Math.round(monsterDamageDealt),
     playerCrit,
     monsterCrit,
     playerCritFail,

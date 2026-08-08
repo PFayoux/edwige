@@ -11,8 +11,8 @@ export type RunAction =
   | { type: 'HYDRATE'; currentRun: RunState | null; bestScore: number }
   | { type: 'START_NEW_RUN'; seed: number }
   | { type: 'OPEN_NEXT_DOOR' }
-  | { type: 'WIN_COMBAT' }
-  | { type: 'LOSE_COMBAT' }
+  | { type: 'WIN_COMBAT'; playerPv: number }
+  | { type: 'LOSE_COMBAT'; playerPv: number }
   | { type: 'RESOLVE_EVENT'; statDelta?: Partial<RunStats>; pvDelta?: number }
   | { type: 'APPLY_REWARD_STAT'; stat: keyof RunStats }
   | { type: 'APPLY_REWARD_ITEM'; itemId: string }
@@ -53,6 +53,10 @@ export function runReducer(state: RunState, action: RunAction): RunState {
 
     case 'WIN_COMBAT': {
       const doorsCleared = state.doorsCleared + 1
+      // Bring the combat's final HP back into RunContext before anything else —
+      // CombatContext tracks it locally during the salvo loop and doesn't sync
+      // automatically (caught by driving the app — see project notes).
+      const statsAfterCombat = { ...state.stats, pv: action.playerPv }
 
       if (doorsCleared === 30) {
         // Tier-3 boss defeated — victory, skipping the normal reward flow (#18).
@@ -62,20 +66,21 @@ export function runReducer(state: RunState, action: RunAction): RunState {
           runOutcome: 'victory',
           doorsCleared,
           activeDoor: null,
+          stats: statsAfterCombat,
           bestScore: Math.max(state.bestScore, doorsCleared),
         }
       }
 
       const rng = restoreRng(state.rngState)
       const healPct = 0.1 + rng.next() * 0.05
-      const pv = Math.min(state.stats.pvMax, Math.round(state.stats.pv + state.stats.pvMax * healPct))
+      const pv = Math.min(statsAfterCombat.pvMax, Math.round(statsAfterCombat.pv + statsAfterCombat.pvMax * healPct))
 
       return {
         ...state,
         screen: 'reward',
         doorsCleared,
         activeDoor: null,
-        stats: { ...state.stats, pv },
+        stats: { ...statsAfterCombat, pv },
         rngState: rng.state,
       }
     }
@@ -85,6 +90,7 @@ export function runReducer(state: RunState, action: RunAction): RunState {
         ...state,
         screen: 'endRun',
         runOutcome: 'death',
+        stats: { ...state.stats, pv: action.playerPv },
         bestScore: Math.max(state.bestScore, state.doorsCleared),
       }
 

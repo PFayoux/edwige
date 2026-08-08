@@ -56,7 +56,7 @@ describe('resolveConfrontation', () => {
 
   it('bonus de maîtrise: stat >= 80 adds +20% damage', () => {
     const result = resolveConfrontation({ die: 50, action: 'attaque' }, masteryStats, { die: 50, action: 'raillerie' }, baseStats)
-    expect(result.playerDamageDealt).toBeCloseTo(38.4) // 80 * 0.4 * 1.2
+    expect(result.playerDamageDealt).toBe(38) // round(80 * 0.4 * 1.2) = round(38.4)
   })
 
   it('both fail: nothing happens', () => {

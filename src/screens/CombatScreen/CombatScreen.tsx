@@ -31,11 +31,11 @@ function CombatBody() {
 
   useEffect(() => {
     if (combat.outcome === 'win' || combat.outcome === 'fled') {
-      runDispatch({ type: 'WIN_COMBAT' })
+      runDispatch({ type: 'WIN_COMBAT', playerPv: Math.max(0, combat.playerPv) })
     } else if (combat.outcome === 'lose') {
-      runDispatch({ type: 'LOSE_COMBAT' })
+      runDispatch({ type: 'LOSE_COMBAT', playerPv: 0 })
     }
-  }, [combat.outcome, runDispatch])
+  }, [combat.outcome, combat.playerPv, runDispatch])
 
   return (
     <div style={{ padding: 'var(--space-4)' }}>
