@@ -139,7 +139,7 @@ Après chaque victoire : 1 point à répartir librement (Force / Dextérité / C
 | Malédiction/Autel | 10% | Effet à double tranchant, activable ou non |
 | Marchand/Repos | 5% | Choix entre gros soin (40–50% PV max) ou bonus de stat |
 
-Boss : apparaît tous les 5–6 portes, tiré depuis un pool séparé du pool "monstres normaux".
+Boss : apparaît tous les 10 portes, tiré depuis un pool séparé du pool "monstres normaux".
 
 **Principe clé** : jamais d'effet caché/surprise sur les pièges ou malédictions — le risque et le gain doivent toujours être visibles avant le choix du joueur. L'objectif est d'éviter que le jeu soit un pur jeu de hasard.
 
