@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Ticket with semicircle notches on the sides -->
+    <path
+        android:fillColor="#FBF5E9"
+        android:pathData="M30,38 h48 a4,4 0 0 1 4,4 v6 a6,6 0 0 0 0,12 v6 a4,4 0 0 1 -4,4 h-48 a4,4 0 0 1 -4,-4 v-6 a6,6 0 0 0 0,-12 v-6 a4,4 0 0 1 4,-4 z" />
+    <!-- Star -->
+    <path
+        android:fillColor="#D4A72C"
+        android:pathData="M54,43 L57.5,50.2 L65.4,51.3 L59.7,56.8 L61.1,64.7 L54,61 L46.9,64.7 L48.3,56.8 L42.6,51.3 L50.5,50.2 Z" />
+</vector>

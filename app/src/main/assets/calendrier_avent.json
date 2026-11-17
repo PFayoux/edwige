@@ -1,0 +1,229 @@
+{
+  "titre": "Calendrier de l'Avent",
+  "regles": "Pour chaque carte, trouver le lieu où la photo a été prise. 3 essais en champ libre, puis un QCM pour les essais 4 et 5. Chaque bonne réponse débloque un bon cadeau, à me remettre quand tu veux pour que je l'organise ou te l'offre ; après 5 échecs, le bon est perdu.",
+  "notes_app": "Champ libre : comparer la saisie avec 'reponses_acceptees' sans tenir compte des majuscules, des accents, des tirets ni des espaces en trop, avec une tolérance aux petites fautes. Si la saisie ne correspond à aucune réponse acceptée mais correspond à l'une des 'reponses_trop_vagues' (quand ce champ existe), afficher « Bonne piste, sois plus précise ! » sans consommer de tentative. QCM : afficher 'qcm_bonne_reponse' et les 3 'qcm_mauvaises_reponses' dans un ordre aléatoire. Ticket : afficher 'cadeau' comme intitulé du bon.",
+  "cartes": [
+    {
+      "jour": 1,
+      "lieu": "Split (plage)",
+      "reponses_acceptees": ["split", "plage de split"],
+      "qcm_bonne_reponse": "Split",
+      "qcm_mauvaises_reponses": ["Marseille", "Hyères", "Altea"],
+      "texte": "Toi qui regardes l'horizon,\nquoi de mieux pour commencer que cette image ?\nTon regard vers le large et le voyage qu'il suggère.\nCette carte est ainsi la première étape d'une traversée dans nos souvenirs.\nJe te propose un calendrier rien que pour toi, une rétrospective de nos moments avec les meilleurs clichés de toi...\nenfin, ça sera à toi de me le dire. Sauras-tu te souvenir des lieux ?\nÀ chaque bonne réponse un cadeau, et Noël t'attendra à l'horizon.",
+      "cadeau": "Bon joker : une corvée faite à ta place"
+    },
+    {
+      "jour": 2,
+      "lieu": "Forêt de Fontainebleau",
+      "reponses_acceptees": ["fontainebleau", "foret de fontainebleau"],
+      "qcm_bonne_reponse": "Fontainebleau",
+      "qcm_mauvaises_reponses": ["Abbaye des Vaux-de-Cernay", "Plitvice", "Rouen"],
+      "texte": "Après la mer, la forêt, paquetage sur le dos, déjà en route pour l'aventure.\nQui sait où nous mèneront les prochains chemins ?",
+      "cadeau": "Invitation pour une randonnée"
+    },
+    {
+      "jour": 3,
+      "lieu": "Altea",
+      "reponses_acceptees": ["altea"],
+      "qcm_bonne_reponse": "Altea",
+      "qcm_mauvaises_reponses": ["Alicante", "La Vila Joiosa", "Guadalest"],
+      "texte": "La mer à nouveau, et toi toujours rayonnante.",
+      "cadeau": "Bon pour un petit-déjeuner au lit"
+    },
+    {
+      "jour": 4,
+      "lieu": "Alicante (forteresse)",
+      "reponses_acceptees": ["alicante", "forteresse d'alicante", "chateau de santa barbara", "santa barbara"],
+      "qcm_bonne_reponse": "Alicante",
+      "qcm_mauvaises_reponses": ["Guadalest", "Klis", "Saint-Tropez"],
+      "texte": "Malgré la chaleur et la hauteur, tu as fini par gravir les remparts de la forteresse.",
+      "cadeau": "Bon pour une glace ou un goûter de ton choix"
+    },
+    {
+      "jour": 5,
+      "lieu": "Tours (grande roue)",
+      "reponses_acceptees": ["tours"],
+      "qcm_bonne_reponse": "Tours",
+      "qcm_mauvaises_reponses": ["Paris", "Rouen", "Poitiers"],
+      "texte": "Contrairement à Icare, nous avons su rester loin du soleil et, collés l'un contre l'autre, résister au vertige.",
+      "cadeau": "Invitation pour une séance d'escalade"
+    },
+    {
+      "jour": 6,
+      "lieu": "Vienne (hôtel)",
+      "reponses_acceptees": ["vienne", "vienna", "wien"],
+      "qcm_bonne_reponse": "Vienne",
+      "qcm_mauvaises_reponses": ["Paris", "Rouen", "Split"],
+      "texte": "Cette photo impromptue, où, bien que je ne sois pas passé inaperçu, j'ai pu saisir ton reflet captivant.",
+      "cadeau": "Bon pour un après-midi shopping"
+    },
+    {
+      "jour": 7,
+      "lieu": "Kunsthistorisches Museum, Vienne",
+      "reponses_acceptees": ["kunsthistorisches museum", "kunsthistorisches", "musee d'histoire de l'art", "khm"],
+      "reponses_trop_vagues": ["vienne", "vienna", "wien", "musee"],
+      "qcm_bonne_reponse": "Kunsthistorisches Museum",
+      "qcm_mauvaises_reponses": ["Belvédère", "Schönbrunn", "Musée des Arts forains"],
+      "texte": "Entourée des deux sphinx, sur son promontoire, les mains croisées sur la balustrade, elle regardait.",
+      "cadeau": "Bon pour une journée de reine : tu décides de tout"
+    },
+    {
+      "jour": 8,
+      "lieu": "Château de Schönbrunn, Vienne",
+      "reponses_acceptees": ["schonbrunn", "schoenbrunn", "chateau de schonbrunn"],
+      "reponses_trop_vagues": ["vienne", "vienna", "wien"],
+      "qcm_bonne_reponse": "Schönbrunn",
+      "qcm_mauvaises_reponses": ["Belvédère", "Kunsthistorisches Museum", "Fontainebleau"],
+      "texte": "Tous les palais n'ont pas de princesse, mais avec toi ma demeure en a une.",
+      "cadeau": "Bon pour un dîner aux chandelles à la maison"
+    },
+    {
+      "jour": 9,
+      "lieu": "Marché de Noël de Schönbrunn, Vienne",
+      "reponses_acceptees": ["schonbrunn", "schoenbrunn", "marche de noel de schonbrunn", "chateau de schonbrunn"],
+      "reponses_trop_vagues": ["vienne", "vienna", "wien", "marche de noel"],
+      "qcm_bonne_reponse": "Schönbrunn",
+      "qcm_mauvaises_reponses": ["Belvédère", "Kunsthistorisches Museum", "Rouen"],
+      "texte": "Je ne t'ai jamais vue si heureuse que devant un sapin et une raclette. Il faudrait faire ça plus souvent.",
+      "cadeau": "Bon pour une soirée raclette"
+    },
+    {
+      "jour": 10,
+      "lieu": "Split (plage)",
+      "reponses_acceptees": ["split", "plage de split"],
+      "qcm_bonne_reponse": "Split",
+      "qcm_mauvaises_reponses": ["Porquerolles", "Alicante", "Saint-Tropez"],
+      "texte": "Tiens, ça te rappelle quelque chose ?",
+      "cadeau": "Bon pour rejouer un bon déjà gagné"
+    },
+    {
+      "jour": 11,
+      "lieu": "Forteresse de Klis",
+      "reponses_acceptees": ["klis", "forteresse de klis"],
+      "qcm_bonne_reponse": "Klis",
+      "qcm_mauvaises_reponses": ["Split", "Guadalest", "Alicante"],
+      "texte": "Aurais-tu pris goût aux ascensions épiques ?",
+      "cadeau": "Invitation pour une visite du Mont-Saint-Michel"
+    },
+    {
+      "jour": 12,
+      "lieu": "Tours (gabare sur la Loire)",
+      "reponses_acceptees": ["tours", "loire"],
+      "qcm_bonne_reponse": "Tours",
+      "qcm_mauvaises_reponses": ["Cergy-Pontoise", "Rouen", "Poitiers"],
+      "texte": "Fier équipage, fiers matelots. Quand hisserons-nous les voiles à nouveau ?",
+      "cadeau": "Invitation pour un week-end en escapade"
+    },
+    {
+      "jour": 13,
+      "lieu": "Cergy-Pontoise (bateau sur l'Oise)",
+      "reponses_acceptees": ["cergy-pontoise", "cergy pontoise", "cergy", "pontoise"],
+      "qcm_bonne_reponse": "Cergy-Pontoise",
+      "qcm_mauvaises_reponses": ["Tours", "Rouen", "Fontainebleau"],
+      "texte": "Une autre embarcation, une autre rivière.",
+      "cadeau": "Invitation pour une balade en kayak"
+    },
+    {
+      "jour": 14,
+      "lieu": "Arc de triomphe du Carrousel, Paris (éclipse)",
+      "reponses_acceptees": ["arc de triomphe du carrousel", "carrousel", "tuileries", "jardin des tuileries", "louvre"],
+      "reponses_trop_vagues": ["paris", "arc de triomphe"],
+      "qcm_bonne_reponse": "Arc de triomphe du Carrousel",
+      "qcm_mauvaises_reponses": ["Arc de triomphe de l'Étoile", "Musée des Arts forains", "Belvédère"],
+      "texte": "Pendant que la Lune et le Soleil s'unissaient, nous ne faisions qu'un.",
+      "cadeau": "Invitation à la Cité des sciences ou pour une soirée sous les étoiles"
+    },
+    {
+      "jour": 15,
+      "lieu": "Plage de Porquerolles",
+      "reponses_acceptees": ["porquerolles"],
+      "qcm_bonne_reponse": "Porquerolles",
+      "qcm_mauvaises_reponses": ["Presqu'île de Giens", "Saint-Tropez", "Split"],
+      "texte": "Même si la température faisait hésiter la sirène, elle réchauffait le cœur du marin.",
+      "cadeau": "Bon pour un après-midi au spa"
+    },
+    {
+      "jour": 16,
+      "lieu": "Citadelle de Saint-Tropez",
+      "reponses_acceptees": ["saint-tropez", "saint tropez", "st-tropez", "st tropez", "citadelle de saint-tropez"],
+      "qcm_bonne_reponse": "Saint-Tropez",
+      "qcm_mauvaises_reponses": ["Alicante", "Klis", "Marseille"],
+      "texte": "Une fois de plus, une ascension, un rempart, mais là tous les deux, et rien que pour cette photo ça valait le coup.",
+      "cadeau": "Bon pour un album photo de nos voyages"
+    },
+    {
+      "jour": 17,
+      "lieu": "La Vila Joiosa (Villajoyosa)",
+      "reponses_acceptees": ["la vila joiosa", "vila joiosa", "villajoyosa", "la villajoyosa"],
+      "qcm_bonne_reponse": "La Vila Joiosa",
+      "qcm_mauvaises_reponses": ["Altea", "Guadalest", "Marseille"],
+      "texte": "Ça te va bien comme couleur, l'orange.",
+      "cadeau": "Bon pour un jus de fruit de ton choix"
+    },
+    {
+      "jour": 18,
+      "lieu": "Forteresse de Guadalest",
+      "reponses_acceptees": ["guadalest", "el castell de guadalest"],
+      "qcm_bonne_reponse": "Guadalest",
+      "qcm_mauvaises_reponses": ["Alicante", "Klis", "Plitvice"],
+      "texte": "Peut-être t'emmènerai-je voir d'autres lacs bleus.",
+      "cadeau": "Invitation pour un week-end à Annecy"
+    },
+    {
+      "jour": 19,
+      "lieu": "Parc à Split",
+      "reponses_acceptees": ["split"],
+      "qcm_bonne_reponse": "Split",
+      "qcm_mauvaises_reponses": ["Vienne", "Alicante", "Tours"],
+      "texte": "Pas besoin d'un grand paysage pour avoir une belle photo.",
+      "cadeau": "Invitation pour un pique-nique au parc"
+    },
+    {
+      "jour": 20,
+      "lieu": "Puy du Fou",
+      "reponses_acceptees": ["puy du fou", "le puy du fou"],
+      "qcm_bonne_reponse": "Puy du Fou",
+      "qcm_mauvaises_reponses": ["Poitiers", "Tours", "Paris"],
+      "texte": "Devrions-nous aller dans un autre parc ?",
+      "cadeau": "Invitation pour une journée au parc d'attractions"
+    },
+    {
+      "jour": 21,
+      "lieu": "Rooftop à Paris",
+      "reponses_acceptees": ["paris"],
+      "qcm_bonne_reponse": "Paris",
+      "qcm_mauvaises_reponses": ["Marseille", "Vienne", "Rouen"],
+      "texte": "Je t'emmènerai courir sur les toits à nouveau.",
+      "cadeau": "Invitation pour un verre sur un rooftop à Paris"
+    },
+    {
+      "jour": 22,
+      "lieu": "Lacs de Plitvice",
+      "reponses_acceptees": ["plitvice", "lacs de plitvice", "parc de plitvice"],
+      "qcm_bonne_reponse": "Plitvice",
+      "qcm_mauvaises_reponses": ["Abbaye des Vaux-de-Cernay", "Guadalest", "Fontainebleau"],
+      "texte": "Après la mer, les rivières et les lacs, il nous manquait les cascades et les torrents.",
+      "cadeau": "Bon pour un massage"
+    },
+    {
+      "jour": 23,
+      "lieu": "Saint-Tropez",
+      "reponses_acceptees": ["saint-tropez", "saint tropez", "st-tropez", "st tropez"],
+      "qcm_bonne_reponse": "Saint-Tropez",
+      "qcm_mauvaises_reponses": ["Porquerolles", "Hyères", "Presqu'île de Giens"],
+      "texte": "On pourrait proposer cette carte postale à l'office de tourisme.",
+      "cadeau": "Bon pour une séance photo à deux ou un cours de photo ensemble"
+    },
+    {
+      "jour": 24,
+      "lieu": "Musée des Arts forains, Paris",
+      "reponses_acceptees": ["musee des arts forains", "arts forains", "pavillons de bercy"],
+      "reponses_trop_vagues": ["paris", "musee", "bercy"],
+      "qcm_bonne_reponse": "Musée des Arts forains",
+      "qcm_mauvaises_reponses": ["Arc de triomphe du Carrousel", "Puy du Fou", "Kunsthistorisches Museum"],
+      "texte": "Noël est enfin là. Quoi de mieux pour terminer cette traversée que la promesse d'une fin d'année en fête avec un fabuleux manège ?\nJ'espère que ce parcours t'aura plu, je me réjouis de toutes ces escapades avec toi, et je serai toujours là pour t'en proposer de nouvelles.\n\nJ'ai hâte de fêter Noël avec toi.",
+      "cadeau": "Invitation à la fête foraine"
+    }
+  ]
+}
+
