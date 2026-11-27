@@ -1,6 +1,4 @@
 {
-  "regles": "Pour chaque carte, trouver le lieu où la photo a été prise. 3 essais en champ libre, puis un QCM pour les essais 4 et 5. Chaque bonne réponse débloque un bon cadeau, à me remettre quand tu veux pour que je l'organise ou te l'offre ; après 5 échecs, le bon est perdu.",
-  "notes_app": "Champ libre : comparer la saisie avec 'reponses_acceptees' sans tenir compte des majuscules, des accents, des tirets ni des espaces en trop, avec une tolérance aux petites fautes. Si la saisie ne correspond à aucune réponse acceptée mais correspond à l'une des 'reponses_trop_vagues' (quand ce champ existe), afficher « Bonne piste, sois plus précise ! » sans consommer de tentative. QCM : afficher 'qcm_bonne_reponse' et les 3 'qcm_mauvaises_reponses' dans un ordre aléatoire. Ticket : afficher 'cadeau' comme intitulé du bon.",
   "cartes": [
     {
       "jour": 1,

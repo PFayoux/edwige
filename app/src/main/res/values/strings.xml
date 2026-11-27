@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Textes d'interface de l'application.
-    Le contenu du calendrier (cartes, règle du jeu) est dans assets/calendrier_avent.json.
+    Le contenu des 24 cartes est dans assets/calendrier_avent.json.
 
     Rappels pour éditer ce fichier :
     - une apostrophe s'écrit \'  (ex. : C\'est parti)
@@ -35,8 +35,10 @@
 
     <!-- ===== Premier lancement ===== -->
 
-    <string name="onboarding_intro">24 cartes, 24 souvenirs. Pour chacune, retrouve le lieu où la photo a été prise.</string>
+    <!-- Volontairement mystérieux : elle découvre le principe en ouvrant la première enveloppe -->
+    <string name="onboarding_intro">Ce calendrier te fera voyager dans nos souvenirs. Sauras-tu t\'y retrouver ?</string>
     <string name="onboarding_rules_title">La règle du jeu</string>
+    <string name="onboarding_rules">Chaque jour, tu ouvriras une nouvelle enveloppe, puis tu viendras ici relever le défi qu\'elle cache. Tu as 5 tentatives : les 3 premières en réponse libre, puis, si tu n\'y arrives pas, un QCM pour les 2 dernières. Une petite faute ou une réponse trop vague ne compte pas comme une tentative. Chaque bonne réponse te fait gagner un ticket, à me remettre quand tu veux pour que je l\'organise ou te l\'offre ; après 5 tentatives ratées, le ticket est perdu.</string>
     <string name="onboarding_reminder_explainer">Je te préviendrai chaque matin à 9 h quand une nouvelle carte t\'attend.</string>
     <string name="onboarding_accept_reminders">Oui, préviens-moi !</string>
     <string name="onboarding_decline_reminders">Non merci, je viendrai toute seule</string>
