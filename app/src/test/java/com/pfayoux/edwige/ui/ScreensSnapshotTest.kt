@@ -31,6 +31,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import java.io.File
 import java.time.LocalDate
+import kotlin.random.Random
 
 /**
  * Captures de tous les écrans sur plusieurs tailles de téléphone et de police.
@@ -56,7 +57,8 @@ class ScreensSnapshotTest(private val name: String, config: DeviceConfig) {
         )
     }
 
-    @get:Rule val paparazzi = Paparazzi(deviceConfig = config, maxPercentDifference = 0.1)
+    // En français comme son téléphone : les pluriels suivent les règles du français (0 → singulier).
+    @get:Rule val paparazzi = Paparazzi(deviceConfig = config.copy(locale = "fr"), maxPercentDifference = 0.1)
 
     private val content = CalendarContent.parse(File("src/main/assets/calendrier_avent.json").readText())
 
@@ -85,7 +87,7 @@ class ScreensSnapshotTest(private val name: String, config: DeviceConfig) {
     )
 
     private fun vm(save: SaveData = midGame, today: LocalDate = LocalDate.of(2026, 12, 14)) =
-        GameViewModel(content, MemoryStore(save), NoReminders) { today }
+        GameViewModel(content, MemoryStore(save), NoReminders, clock = { today }, random = Random(0))
 
     private fun snap(content: @Composable () -> Unit) = paparazzi.snapshot {
         CompositionLocalProvider(LocalActivityResultRegistryOwner provides FakeRegistryOwner) {

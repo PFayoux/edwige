@@ -10,7 +10,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import com.pfayoux.edwige.R
 import com.pfayoux.edwige.ui.theme.ChristmasRed
 import com.pfayoux.edwige.ui.theme.Paper
 
@@ -23,7 +25,7 @@ fun BackTopBar(title: String, onBack: () -> Unit) {
         },
         navigationIcon = {
             IconButton(onClick = onBack) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour")
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Paper),

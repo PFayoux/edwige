@@ -7,7 +7,6 @@ import kotlinx.serialization.json.Json
 /** Contenu du calendrier, tel qu'écrit dans `calendrier_avent.json`. */
 @Serializable
 data class CalendarContent(
-    val titre: String,
     val regles: String = "",
     val cartes: List<Card>,
 ) {

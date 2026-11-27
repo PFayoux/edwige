@@ -1,3 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Textes d'interface de l'application.
+    Le contenu du calendrier (cartes, règle du jeu) est dans assets/calendrier_avent.json.
+
+    Rappels pour éditer ce fichier :
+    - une apostrophe s'écrit \'  (ex. : C\'est parti)
+    - %1$d, %2$d… sont remplacés par des nombres, %1$s, %2$s… par du texte :
+      on peut les déplacer dans la phrase mais pas les supprimer
+    - <plurals> : "one" sert pour 0 et 1, "other" pour 2 et plus
+    - <string-array> : l'application tire un des messages au hasard ;
+      on peut en ajouter ou en retirer librement
+    Après modification : publier une nouvelle version (tag vX.Y.Z plus élevé).
+-->
 <resources>
+
+    <!-- ===== Général ===== -->
+
+    <!-- Nom sous l'icône, titre de l'accueil et de la notification -->
     <string name="app_name">Calendrier de l\'Avent</string>
+    <!-- Description de la flèche retour (lecteur d'écran) -->
+    <string name="common_back">Retour</string>
+    <!-- Titre des écrans d'une carte et de la carte postale. %1$d = jour -->
+    <string name="card_title">Carte n° %1$d</string>
+    <!-- Lecteur d'écran. %1$d = étoiles gagnées, %2$d = maximum -->
+    <plurals name="stars_description">
+        <item quantity="one">%1$d étoile sur %2$d</item>
+        <item quantity="other">%1$d étoiles sur %2$d</item>
+    </plurals>
+    <!-- Lecteur d'écran. %1$d = tentatives restantes, %2$d = maximum -->
+    <plurals name="attempts_dots_description">
+        <item quantity="one">%1$d tentative restante sur %2$d</item>
+        <item quantity="other">%1$d tentatives restantes sur %2$d</item>
+    </plurals>
+
+    <!-- ===== Premier lancement ===== -->
+
+    <string name="onboarding_intro">24 cartes, 24 souvenirs. Pour chacune, retrouve le lieu où la photo a été prise.</string>
+    <string name="onboarding_rules_title">La règle du jeu</string>
+    <string name="onboarding_reminder_explainer">Je te préviendrai chaque matin à 9 h quand une nouvelle carte t\'attend.</string>
+    <string name="onboarding_accept_reminders">Oui, préviens-moi !</string>
+    <string name="onboarding_decline_reminders">Non merci, je viendrai toute seule</string>
+
+    <!-- ===== Accueil ===== -->
+
+    <!-- %1$d = lieux trouvés, %2$d = nombre de cartes -->
+    <plurals name="home_found_count">
+        <item quantity="one">%1$d / %2$d lieu trouvé</item>
+        <item quantity="other">%1$d / %2$d lieux trouvés</item>
+    </plurals>
+    <!-- %1$d = total des étoiles -->
+    <string name="home_total_stars">★ %1$d</string>
+    <!-- Visible seulement en date simulée. %1$d = jour, %2$d = mois, %3$d = année -->
+    <string name="home_simulated_date">Date simulée : %1$d/%2$d/%3$d</string>
+    <string name="home_journey_complete">Ton carnet de voyage est complet ! Voir le bilan →</string>
+    <string name="home_before_december">La première carte s\'ouvre le 1er décembre. Encore un peu de patience…</string>
+    <!-- Appui sur une carte verrouillée. %1$d = jour -->
+    <string name="home_card_locked">Patience… cette carte s\'ouvre le %1$d décembre.</string>
+    <string name="home_reminder_enabled">Rappel du matin activé (9 h).</string>
+    <string name="home_reminder_disabled">Rappel du matin désactivé.</string>
+    <string name="home_reminder_permission_denied">Pour les rappels, autorise les notifications dans les réglages du téléphone.</string>
+    <!-- Description de la cloche (lecteur d'écran) -->
+    <string name="home_reminder_enable">Activer le rappel du matin</string>
+    <string name="home_reminder_disable">Désactiver le rappel du matin</string>
+
+    <!-- Petit texte dans une case du calendrier -->
+    <string name="home_cell_qcm">QCM</string>
+    <string name="home_cell_in_progress">En cours</string>
+    <string name="home_cell_today">Aujourd\'hui</string>
+    <string name="home_cell_to_play">À jouer</string>
+
+    <!-- Lecteur d'écran, une case du calendrier. %1$d = jour, %2$s = lieu -->
+    <string name="home_cell_locked_description">Carte %1$d, verrouillée</string>
+    <string name="home_cell_to_play_description">Carte %1$d, à jouer</string>
+    <string name="home_cell_today_description">Carte %1$d, à jouer, carte du jour</string>
+    <string name="home_cell_found_description">Carte %1$d, trouvée : %2$s</string>
+    <string name="home_cell_missed_description">Carte %1$d, manquée : %2$s</string>
+
+    <!-- Code du mode organisateur -->
+    <string name="home_pin_title">Code</string>
+    <string name="home_pin_close">Fermer</string>
+
+    <!-- ===== Réponse ===== -->
+
+    <string name="answer_question">Où cette photo a-t-elle été prise ?</string>
+    <!-- %1$d = tentatives restantes -->
+    <plurals name="answer_attempts_remaining">
+        <item quantity="one">Tentative restante : %1$d</item>
+        <item quantity="other">Tentatives restantes : %1$d</item>
+    </plurals>
+    <string name="answer_qcm_intro">Dernière ligne droite : choisis le bon lieu.</string>
+    <string name="answer_input_label">Le lieu</string>
+    <string name="answer_input_placeholder">Ville, monument, plage…</string>
+    <string name="answer_submit">Valider</string>
+
+    <!-- Titre du bandeau de réaction sous la réponse -->
+    <string name="feedback_title_correct">Correct !</string>
+    <string name="feedback_title_almost">Presque !</string>
+    <string name="feedback_title_too_vague">Plus précis !</string>
+    <string name="feedback_title_wrong">Raté</string>
+
+    <!-- Petite faute d'orthographe : ne compte pas comme une tentative -->
+    <string-array name="feedback_almost">
+        <item>Vérifie l\'orthographe, tu y es.</item>
+        <item>Tout près ! Une petite lettre te joue des tours ?</item>
+        <item>Relis bien, c\'est à un cheveu.</item>
+        <item>Ça y ressemble beaucoup… regarde l\'orthographe !</item>
+    </string-array>
+    <!-- Bonne ville mais pas assez précis : ne compte pas comme une tentative -->
+    <string-array name="feedback_too_vague">
+        <item>Bonne piste, sois plus précise !</item>
+        <item>Tu brûles ! Mais où exactement ?</item>
+        <item>C\'est bien la bonne ville… mais quel endroit précis ?</item>
+    </string-array>
+    <!-- Mauvaise réponse -->
+    <string-array name="feedback_wrong">
+        <item>Ce n\'est pas ça, mais tu vas trouver !</item>
+        <item>Raté, mais ne lâche rien.</item>
+        <item>Hmm, pas tout à fait. Repense à ce jour-là…</item>
+        <item>Non, mais je crois en toi !</item>
+        <item>Pas encore ! Ferme les yeux, souviens-toi…</item>
+    </string-array>
+    <!-- Après la 3e mauvaise réponse en champ libre. %1$s = un message de feedback_wrong -->
+    <string name="feedback_wrong_then_qcm">%1$s Je t\'aide : choisis parmi ces 4 lieux.</string>
+    <!-- Après une mauvaise réponse au 1er essai du QCM. %1$s = un message de feedback_wrong -->
+    <string name="feedback_wrong_last_chance">%1$s Plus qu\'une chance !</string>
+
+    <!-- ===== Révélation ===== -->
+
+    <!-- Grand titre. %1$s = lieu court -->
+    <string name="reveal_place_title">%1$s !</string>
+    <!-- Juste après avoir trouvé -->
+    <string-array name="reveal_correct">
+        <item>Bravo, tu t\'en souviens !</item>
+        <item>Exactement ! Quelle mémoire !</item>
+        <item>Oui ! C\'était bien là.</item>
+        <item>Gagné ! Tu m\'impressionnes.</item>
+        <item>Dans le mille !</item>
+    </string-array>
+    <!-- Carte manquée (toujours le même message pour une carte donnée) -->
+    <string-array name="reveal_missed">
+        <item>Ce cadeau-là s\'envole… mais pas le souvenir !</item>
+        <item>Pas grave : le souvenir, lui, reste à nous.</item>
+        <item>Celle-ci t\'a échappé, mais on y retournera peut-être !</item>
+    </string-array>
+    <string name="reveal_back_home">Retour au calendrier</string>
+    <string name="reveal_see_tickets">Voir mes tickets</string>
+
+    <!-- ===== Tickets ===== -->
+
+    <!-- Bouton de l'accueil et titre de l'écran -->
+    <string name="tickets_title">Mes tickets</string>
+    <string name="tickets_empty">Pas encore de ticket… Trouve ta première carte pour en gagner un !</string>
+    <!-- %1$d = tickets gagnés, %2$d = tickets à utiliser -->
+    <plurals name="tickets_summary">
+        <item quantity="one">%1$d ticket gagné, dont %2$d à utiliser</item>
+        <item quantity="other">%1$d tickets gagnés, dont %2$d à utiliser</item>
+    </plurals>
+    <!-- En haut du ticket. %1$02d = jour sur 2 chiffres (01, 02…) -->
+    <string name="ticket_number">TICKET N° %1$02d</string>
+    <string name="ticket_used_stamp">UTILISÉ</string>
+    <string name="tickets_mark_used">J\'en ai profité, marquer comme utilisé</string>
+    <string name="tickets_confirm_title">Ticket utilisé ?</string>
+    <!-- %1$s = intitulé du cadeau -->
+    <string name="tickets_confirm_text">« %1$s » sera tamponné « Utilisé ». Il restera dans ta collection, comme un souvenir.</string>
+    <string name="tickets_confirm_yes">Oui, tamponner</string>
+    <string name="tickets_confirm_no">Pas encore</string>
+
+    <!-- ===== Carnet de voyage (fin du calendrier) ===== -->
+
+    <string name="journey_title">Carnet de voyage</string>
+    <string name="journey_merry_christmas">Joyeux Noël !</string>
+    <!-- %1$s = journey_places, %2$d = nombre de cartes, %3$s = journey_stars -->
+    <string name="journey_summary">Tu as retrouvé %1$s sur %2$d, et gagné %3$s.</string>
+    <plurals name="journey_places">
+        <item quantity="one">%1$d lieu</item>
+        <item quantity="other">%1$d lieux</item>
+    </plurals>
+    <plurals name="journey_stars">
+        <item quantity="one">%1$d étoile</item>
+        <item quantity="other">%1$d étoiles</item>
+    </plurals>
+    <string name="journey_steps_intro">Notre parcours, étape par étape :</string>
+
+    <!-- ===== Notification du matin ===== -->
+
+    <!-- Nom et description du canal, visibles dans les réglages du téléphone -->
+    <string name="notification_channel_name">Carte du jour</string>
+    <string name="notification_channel_description">Le petit rappel du matin quand une nouvelle carte t\'attend</string>
+    <string-array name="notification_messages">
+        <item>Une nouvelle carte t\'attend !</item>
+        <item>Ta carte du jour est prête à être devinée.</item>
+        <item>Un nouveau souvenir à retrouver aujourd\'hui !</item>
+        <item>Debout, voyageuse : une carte t\'attend !</item>
+    </string-array>
+
+    <!-- ===== Mode organisateur ===== -->
+
+    <string name="organizer_title">Mode organisateur</string>
+
+    <string name="organizer_date_section">Date</string>
+    <!-- %1$d = jour, %2$d = mois, %3$d = année -->
+    <string name="organizer_date_simulated">Date utilisée : %1$d/%2$d/%3$d (simulée)</string>
+    <string name="organizer_date_real">Date utilisée : %1$d/%2$d/%3$d (vraie date)</string>
+    <string name="organizer_day_minus">− 1 jour</string>
+    <string name="organizer_day_plus">+ 1 jour</string>
+    <string name="organizer_first_december">1er déc.</string>
+    <string name="organizer_unlock_all">Tout débloquer</string>
+    <string name="organizer_real_date">Vraie date</string>
+    <string name="organizer_date_note">La date simulée ne change que le déblocage des cartes. Les rappels suivent la vraie date.</string>
+
+    <string name="organizer_notifications_section">Notifications</string>
+    <string name="organizer_test_notification">Envoyer une notification de test</string>
+
+    <string name="organizer_cards_section">Cartes</string>
+    <!-- %1$d = jour, %2$s = lieu court -->
+    <string name="organizer_card_row">%1$d · %2$s</string>
+    <!-- %1$d = étoiles -->
+    <string name="organizer_status_found">trouvée, %1$d★</string>
+    <string name="organizer_status_found_ticket_used">trouvée, %1$d★, ticket utilisé</string>
+    <string name="organizer_status_missed">manquée</string>
+    <string name="organizer_status_locked">verrouillée</string>
+    <string name="organizer_status_not_started">pas commencée</string>
+    <plurals name="organizer_status_attempts_remaining">
+        <item quantity="one">%1$d tentative restante</item>
+        <item quantity="other">%1$d tentatives restantes</item>
+    </plurals>
+    <string name="organizer_validate">Valider</string>
+    <string name="organizer_give_back_attempt">Rendre une tentative</string>
+
+    <string name="organizer_reset_section">Remise à zéro</string>
+    <string name="organizer_reset">Tout réinitialiser</string>
+    <string name="organizer_reset_note">Efface toute la progression, les tickets, la date simulée et les réglages, comme une appli neuve.</string>
+    <string name="organizer_reset_confirm_title">Tout réinitialiser ?</string>
+    <string name="organizer_reset_confirm_text">Toutes les réponses, étoiles et tickets seront effacés. C\'est définitif.</string>
+    <string name="organizer_reset_confirm_yes">Réinitialiser</string>
+    <string name="organizer_reset_confirm_no">Annuler</string>
+
 </resources>

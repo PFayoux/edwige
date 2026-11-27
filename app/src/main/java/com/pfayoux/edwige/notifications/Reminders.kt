@@ -17,7 +17,6 @@ import com.pfayoux.edwige.MainActivity
 import com.pfayoux.edwige.R
 import com.pfayoux.edwige.data.ProgressStore
 import com.pfayoux.edwige.domain.AdventCalendar
-import com.pfayoux.edwige.domain.Messages
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -85,8 +84,8 @@ object Reminders {
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setColor(0xFFB3342E.toInt())
-            .setContentTitle("Calendrier de l'Avent")
-            .setContentText(Messages.pick(Messages.notifications))
+            .setContentTitle(context.getString(R.string.app_name))
+            .setContentText(context.resources.getStringArray(R.array.notification_messages).random())
             .setContentIntent(open)
             .setAutoCancel(true)
             .build()
@@ -96,8 +95,8 @@ object Reminders {
     private fun ensureChannel(context: Context) {
         val manager = context.getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(
-            NotificationChannel(CHANNEL_ID, "Carte du jour", NotificationManager.IMPORTANCE_DEFAULT).apply {
-                description = "Le petit rappel du matin quand une nouvelle carte t'attend"
+            NotificationChannel(CHANNEL_ID, context.getString(R.string.notification_channel_name), NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = context.getString(R.string.notification_channel_description)
             },
         )
     }

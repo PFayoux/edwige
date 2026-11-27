@@ -10,11 +10,11 @@ import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -55,20 +55,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.rememberTextMeasurer
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.pfayoux.edwige.GameViewModel
+import com.pfayoux.edwige.R
 import com.pfayoux.edwige.Screen
 import com.pfayoux.edwige.domain.AdventCalendar
 import com.pfayoux.edwige.domain.CardStatus
@@ -97,7 +100,7 @@ fun HomeScreen(vm: GameViewModel) {
     val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         vm.setNotificationsEnabled(granted)
         if (!granted) scope.launch {
-            snackbar.showSnackbar("Pour les rappels, autorise les notifications dans les réglages du téléphone.")
+            snackbar.showSnackbar(context.getString(R.string.home_reminder_permission_denied))
         }
     }
 
@@ -111,7 +114,7 @@ fun HomeScreen(vm: GameViewModel) {
             vm.setNotificationsEnabled(enable)
             scope.launch {
                 snackbar.currentSnackbarData?.dismiss()
-                snackbar.showSnackbar(if (enable) "Rappel du matin activé (9 h)." else "Rappel du matin désactivé.")
+                snackbar.showSnackbar(context.getString(if (enable) R.string.home_reminder_enabled else R.string.home_reminder_disabled))
             }
         }
     }
@@ -126,7 +129,7 @@ fun HomeScreen(vm: GameViewModel) {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    "Calendrier de l'Avent",
+                    stringResource(R.string.app_name),
                     style = MaterialTheme.typography.headlineMedium,
                     color = ChristmasRed,
                     modifier = Modifier
@@ -143,7 +146,7 @@ fun HomeScreen(vm: GameViewModel) {
                 IconButton(onClick = ::toggleNotifications) {
                     Icon(
                         if (vm.save.notificationsEnabled) Icons.Outlined.Notifications else Icons.Outlined.NotificationsOff,
-                        contentDescription = if (vm.save.notificationsEnabled) "Désactiver le rappel du matin" else "Activer le rappel du matin",
+                        contentDescription = stringResource(if (vm.save.notificationsEnabled) R.string.home_reminder_disable else R.string.home_reminder_enable),
                         tint = InkSoft,
                     )
                 }
@@ -151,17 +154,17 @@ fun HomeScreen(vm: GameViewModel) {
             Spacer(Modifier.height(4.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    "${vm.foundCount} / ${AdventCalendar.DAYS} lieux trouvés",
+                    pluralStringResource(R.plurals.home_found_count, vm.foundCount, vm.foundCount, AdventCalendar.DAYS),
                     style = MaterialTheme.typography.titleMedium,
                     color = Ink,
                     modifier = Modifier.weight(1f, fill = false),
                 )
                 Spacer(Modifier.size(12.dp))
-                Text("★ ${vm.totalStars}", style = MaterialTheme.typography.titleMedium, color = Gold, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.home_total_stars, vm.totalStars), style = MaterialTheme.typography.titleMedium, color = Gold, fontWeight = FontWeight.Bold)
             }
             if (vm.isDateSimulated) {
                 Text(
-                    "Date simulée : ${vm.today.dayOfMonth}/${vm.today.monthValue}/${vm.today.year}",
+                    stringResource(R.string.home_simulated_date, vm.today.dayOfMonth, vm.today.monthValue, vm.today.year),
                     style = MaterialTheme.typography.labelMedium,
                     color = ChristmasRed,
                 )
@@ -170,7 +173,7 @@ fun HomeScreen(vm: GameViewModel) {
             FilledTonalButton(onClick = { vm.navigate(Screen.Tickets) }, modifier = Modifier.fillMaxWidth()) {
                 Icon(Icons.Outlined.ConfirmationNumber, contentDescription = null)
                 Spacer(Modifier.size(8.dp))
-                Text("Mes tickets")
+                Text(stringResource(R.string.tickets_title))
             }
             Spacer(Modifier.height(16.dp))
 
@@ -182,7 +185,7 @@ fun HomeScreen(vm: GameViewModel) {
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
-                        "Ton carnet de voyage est complet ! Voir le bilan →",
+                        stringResource(R.string.home_journey_complete),
                         Modifier.padding(16.dp),
                         color = Color.White,
                         style = MaterialTheme.typography.titleMedium,
@@ -191,7 +194,7 @@ fun HomeScreen(vm: GameViewModel) {
                 }
                 Spacer(Modifier.height(16.dp))
             } else if (vm.today.isBefore(AdventCalendar.unlockDate(1))) {
-                SoftNote("La première carte s'ouvre le 1er décembre. Encore un peu de patience…")
+                SoftNote(stringResource(R.string.home_before_december))
                 Spacer(Modifier.height(16.dp))
             }
 
@@ -199,7 +202,7 @@ fun HomeScreen(vm: GameViewModel) {
                 if (vm.status(day) == CardStatus.LOCKED) {
                     scope.launch {
                         snackbar.currentSnackbarData?.dismiss()
-                        snackbar.showSnackbar("Patience… cette carte s'ouvre le $day décembre.")
+                        snackbar.showSnackbar(context.getString(R.string.home_card_locked, day))
                     }
                 } else {
                     vm.openCard(day)
@@ -288,10 +291,13 @@ private fun DayCell(vm: GameViewModel, day: Int, textWidth: Dp, modifier: Modifi
         else -> BorderStroke(1.dp, Faded)
     }
     val label = when (status) {
-        CardStatus.LOCKED -> "Carte $day, verrouillée"
-        CardStatus.AVAILABLE -> "Carte $day, à jouer" + if (isToday) ", carte du jour" else ""
-        CardStatus.FOUND -> "Carte $day, trouvée : ${card.shortPlace}"
-        CardStatus.MISSED -> "Carte $day, manquée : ${card.shortPlace}"
+        CardStatus.LOCKED -> stringResource(R.string.home_cell_locked_description, day)
+        CardStatus.AVAILABLE -> stringResource(
+            if (isToday) R.string.home_cell_today_description else R.string.home_cell_to_play_description,
+            day,
+        )
+        CardStatus.FOUND -> stringResource(R.string.home_cell_found_description, day, card.shortPlace)
+        CardStatus.MISSED -> stringResource(R.string.home_cell_missed_description, day, card.shortPlace)
     }
 
     Surface(
@@ -318,10 +324,10 @@ private fun DayCell(vm: GameViewModel, day: Int, textWidth: Dp, modifier: Modifi
                 CardStatus.LOCKED -> Icon(Icons.Filled.Lock, contentDescription = null, tint = Faded, modifier = Modifier.size(18.dp))
                 CardStatus.AVAILABLE -> FitWordsText(
                     when {
-                        progress.isInQcm -> "QCM"
-                        progress.attemptsUsed > 0 -> "En cours"
-                        isToday -> "Aujourd'hui"
-                        else -> "À jouer"
+                        progress.isInQcm -> stringResource(R.string.home_cell_qcm)
+                        progress.attemptsUsed > 0 -> stringResource(R.string.home_cell_in_progress)
+                        isToday -> stringResource(R.string.home_cell_today)
+                        else -> stringResource(R.string.home_cell_to_play)
                     },
                     textWidth,
                     MaterialTheme.typography.labelSmall,
@@ -344,7 +350,7 @@ private fun PinDialog(onDismiss: () -> Unit, onPin: (String) -> Unit) {
     var pin by remember { mutableStateOf("") }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Code") },
+        title = { Text(stringResource(R.string.home_pin_title)) },
         text = {
             OutlinedTextField(
                 value = pin,
@@ -359,6 +365,6 @@ private fun PinDialog(onDismiss: () -> Unit, onPin: (String) -> Unit) {
             )
         },
         confirmButton = {},
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Fermer") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.home_pin_close)) } },
     )
 }

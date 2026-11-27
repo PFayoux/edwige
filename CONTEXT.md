@@ -22,6 +22,14 @@ _À éviter_ : case, jour, question
 La bonne réponse d'une carte, telle qu'elle est affichée une fois révélée.
 _À éviter_ : réponse, destination
 
+**Contenu du calendrier** :
+Ce que l'organisateur a écrit pour ce calendrier : les 24 cartes et la règle du jeu.
+_À éviter_ : données, textes
+
+**Texte d'interface** :
+Tout texte affiché par l'application qui n'est pas du contenu du calendrier : boutons, titres d'écran, messages de réaction, notifications.
+_À éviter_ : libellés, wording
+
 **Réponse acceptée** :
 Une des formulations considérées comme justes pour le lieu d'une carte.
 
