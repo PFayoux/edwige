@@ -13,10 +13,10 @@ import com.pfayoux.edwige.domain.CalendarContent
 import com.pfayoux.edwige.domain.CardProgress
 import com.pfayoux.edwige.domain.CardRules
 import com.pfayoux.edwige.domain.CardStatus
-import com.pfayoux.edwige.domain.Messages
 import com.pfayoux.edwige.domain.Verdict
 import com.pfayoux.edwige.notifications.ReminderScheduler
 import java.time.LocalDate
+import kotlin.random.Random
 
 sealed interface Screen {
     data object Onboarding : Screen
@@ -28,14 +28,22 @@ sealed interface Screen {
     data object Organizer : Screen
 }
 
-/** Retour affiché sous la réponse. [id] change à chaque essai pour rejouer l'animation. */
-data class Feedback(val day: Int, val verdict: Verdict, val message: String, val id: Long)
+/** Quel message de réaction afficher sous la réponse (textes dans strings.xml). */
+enum class FeedbackMessage { ALMOST, TOO_VAGUE, WRONG, WRONG_THEN_QCM, WRONG_LAST_CHANCE }
+
+/**
+ * Retour affiché sous la réponse. [pick] choisit le message dans la liste correspondante,
+ * fixé au moment de l'essai pour ne pas changer à chaque affichage.
+ * [id] change à chaque essai pour rejouer l'animation.
+ */
+data class Feedback(val day: Int, val verdict: Verdict, val message: FeedbackMessage, val pick: Int, val id: Long)
 
 class GameViewModel(
     val content: CalendarContent,
     private val store: SaveStore,
     private val reminders: ReminderScheduler,
     private val clock: () -> LocalDate = LocalDate::now,
+    private val random: Random = Random,
 ) : ViewModel() {
 
     private val matcher = AnswerMatcher.forContent(content)
@@ -108,15 +116,11 @@ class GameViewModel(
             return
         }
         val message = when (verdict) {
-            Verdict.PRESQUE -> Messages.pick(Messages.almost)
-            Verdict.TROP_VAGUE -> Messages.pick(Messages.tooVague)
-            else -> if (after.isInQcm) {
-                "${Messages.pick(Messages.wrong)} Je t'aide : choisis parmi ces 4 lieux."
-            } else {
-                Messages.pick(Messages.wrong)
-            }
+            Verdict.PRESQUE -> FeedbackMessage.ALMOST
+            Verdict.TROP_VAGUE -> FeedbackMessage.TOO_VAGUE
+            else -> if (after.isInQcm) FeedbackMessage.WRONG_THEN_QCM else FeedbackMessage.WRONG
         }
-        feedback = Feedback(day, verdict, message, System.nanoTime())
+        showFeedback(day, verdict, message)
     }
 
     fun chooseQcm(day: Int, option: String) {
@@ -127,12 +131,12 @@ class GameViewModel(
         update { it.withProgress(day, after) }
         when {
             after.isDone -> replaceTop(Screen.Reveal(day, celebrate = after.isFound))
-            else -> feedback = Feedback(
-                day, Verdict.FAUX,
-                "${Messages.pick(Messages.wrong)} Plus qu'une chance !",
-                System.nanoTime(),
-            )
+            else -> showFeedback(day, Verdict.FAUX, FeedbackMessage.WRONG_LAST_CHANCE)
         }
+    }
+
+    private fun showFeedback(day: Int, verdict: Verdict, message: FeedbackMessage) {
+        feedback = Feedback(day, verdict, message, random.nextInt(Int.MAX_VALUE), System.nanoTime())
     }
 
     fun markTicketUsed(day: Int) = update {

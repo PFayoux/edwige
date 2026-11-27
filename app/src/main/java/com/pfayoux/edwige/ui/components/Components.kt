@@ -1,5 +1,8 @@
 package com.pfayoux.edwige.ui.components
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -38,6 +41,8 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -47,9 +52,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
+import com.pfayoux.edwige.R
 import com.pfayoux.edwige.domain.Card
 import com.pfayoux.edwige.domain.CardRules
 import com.pfayoux.edwige.ui.theme.ChristmasRed
@@ -66,8 +69,9 @@ import kotlin.random.Random
 
 @Composable
 fun Stars(count: Int, modifier: Modifier = Modifier, size: Dp = 18.dp, max: Int = 3) {
+    val description = pluralStringResource(R.plurals.stars_description, count, count, max)
     Row(
-        modifier.semantics { contentDescription = "$count étoile${if (count > 1) "s" else ""} sur $max" },
+        modifier.semantics { contentDescription = description },
         horizontalArrangement = Arrangement.Center,
     ) {
         repeat(max) { i ->
@@ -84,8 +88,9 @@ fun Stars(count: Int, modifier: Modifier = Modifier, size: Dp = 18.dp, max: Int 
 /** ●●●○○ : les tentatives restantes. */
 @Composable
 fun AttemptsDots(remaining: Int, modifier: Modifier = Modifier) {
+    val description = pluralStringResource(R.plurals.attempts_dots_description, remaining, remaining, CardRules.MAX_ATTEMPTS)
     Row(
-        modifier.semantics { contentDescription = "$remaining tentatives restantes sur ${CardRules.MAX_ATTEMPTS}" },
+        modifier.semantics { contentDescription = description },
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -155,7 +160,7 @@ fun Ticket(card: Card, used: Boolean, modifier: Modifier = Modifier) {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
-                    "TICKET N° %02d".format(card.jour),
+                    stringResource(R.string.ticket_number, card.jour),
                     style = MaterialTheme.typography.labelMedium.copy(letterSpacing = 2.sp),
                     color = if (used) InkSoft else ChristmasRed,
                 )
@@ -179,7 +184,7 @@ fun Ticket(card: Card, used: Boolean, modifier: Modifier = Modifier) {
         }
         if (used) {
             Text(
-                "UTILISÉ",
+                stringResource(R.string.ticket_used_stamp),
                 modifier = Modifier
                     .align(Alignment.Center)
                     .rotate(-14f)

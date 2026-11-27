@@ -19,9 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pfayoux.edwige.GameViewModel
+import com.pfayoux.edwige.R
 import com.pfayoux.edwige.domain.AdventCalendar
 import com.pfayoux.edwige.ui.components.Confetti
 import com.pfayoux.edwige.ui.components.Stars
@@ -35,7 +38,7 @@ import com.pfayoux.edwige.ui.theme.InkSoft
 @Composable
 fun JourneyScreen(vm: GameViewModel) {
     Box(Modifier.fillMaxSize()) {
-        Scaffold(topBar = { BackTopBar("Carnet de voyage") { vm.back() } }) { padding ->
+        Scaffold(topBar = { BackTopBar(stringResource(R.string.journey_title)) { vm.back() } }) { padding ->
             Column(
                 Modifier
                     .fillMaxSize()
@@ -45,13 +48,18 @@ fun JourneyScreen(vm: GameViewModel) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                Text("Joyeux Noël !", style = MaterialTheme.typography.displaySmall, color = ChristmasRed, textAlign = TextAlign.Center)
+                Text(stringResource(R.string.journey_merry_christmas), style = MaterialTheme.typography.displaySmall, color = ChristmasRed, textAlign = TextAlign.Center)
                 Text(
-                    "Tu as retrouvé ${vm.foundCount} lieux sur ${AdventCalendar.DAYS}, et gagné ${vm.totalStars} étoiles.",
+                    stringResource(
+                        R.string.journey_summary,
+                        pluralStringResource(R.plurals.journey_places, vm.foundCount, vm.foundCount),
+                        AdventCalendar.DAYS,
+                        pluralStringResource(R.plurals.journey_stars, vm.totalStars, vm.totalStars),
+                    ),
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                 )
-                Text("Notre parcours, étape par étape :", style = MaterialTheme.typography.bodyLarge, color = InkSoft)
+                Text(stringResource(R.string.journey_steps_intro), style = MaterialTheme.typography.bodyLarge, color = InkSoft)
                 Spacer(Modifier.height(4.dp))
                 (1..AdventCalendar.DAYS).forEach { day ->
                     val card = vm.content.card(day)

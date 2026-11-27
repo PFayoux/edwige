@@ -33,17 +33,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.pfayoux.edwige.Feedback
+import com.pfayoux.edwige.FeedbackMessage
 import com.pfayoux.edwige.GameViewModel
+import com.pfayoux.edwige.R
 import com.pfayoux.edwige.domain.Verdict
 import com.pfayoux.edwige.ui.components.AttemptsDots
 import com.pfayoux.edwige.ui.components.Postcard
@@ -67,7 +73,7 @@ fun AnswerScreen(vm: GameViewModel, day: Int) {
         if (feedback?.verdict == Verdict.FAUX) input = ""
     }
 
-    Scaffold(topBar = { BackTopBar("Carte n° $day") { vm.back() } }) { padding ->
+    Scaffold(topBar = { BackTopBar(stringResource(R.string.card_title, day)) { vm.back() } }) { padding ->
         Column(
             Modifier
                 .fillMaxSize()
@@ -77,17 +83,17 @@ fun AnswerScreen(vm: GameViewModel, day: Int) {
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            Postcard("Carte n° $day", card.texte)
+            Postcard(stringResource(R.string.card_title, day), card.texte)
 
             Text(
-                "Où cette photo a-t-elle été prise ?",
+                stringResource(R.string.answer_question),
                 style = MaterialTheme.typography.titleLarge,
                 color = Ink,
             )
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    "Tentatives restantes : ${progress.attemptsRemaining}",
+                    pluralStringResource(R.plurals.answer_attempts_remaining, progress.attemptsRemaining, progress.attemptsRemaining),
                     style = MaterialTheme.typography.bodyMedium,
                     color = InkSoft,
                     modifier = Modifier.weight(1f, fill = false).padding(end = 12.dp),
@@ -97,7 +103,7 @@ fun AnswerScreen(vm: GameViewModel, day: Int) {
 
             if (progress.isInQcm) {
                 Text(
-                    "Dernière ligne droite : choisis le bon lieu.",
+                    stringResource(R.string.answer_qcm_intro),
                     style = MaterialTheme.typography.bodyLarge,
                     color = InkSoft,
                 )
@@ -129,8 +135,8 @@ fun AnswerScreen(vm: GameViewModel, day: Int) {
                 OutlinedTextField(
                     value = input,
                     onValueChange = { input = it },
-                    label = { Text("Le lieu") },
-                    placeholder = { Text("Ville, monument, plage…") },
+                    label = { Text(stringResource(R.string.answer_input_label)) },
+                    placeholder = { Text(stringResource(R.string.answer_input_placeholder)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(
@@ -145,7 +151,7 @@ fun AnswerScreen(vm: GameViewModel, day: Int) {
                     modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
                     shape = RoundedCornerShape(12.dp),
                 ) {
-                    Text("Valider", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.answer_submit), style = MaterialTheme.typography.titleMedium)
                 }
             }
 
@@ -154,7 +160,7 @@ fun AnswerScreen(vm: GameViewModel, day: Int) {
                 transitionSpec = { (fadeIn() + scaleIn(initialScale = 0.9f)) togetherWith fadeOut() },
                 label = "feedback",
             ) { fb ->
-                if (fb != null) FeedbackBanner(fb.verdict, fb.message) else Spacer(Modifier.height(1.dp))
+                if (fb != null) FeedbackBanner(fb) else Spacer(Modifier.height(1.dp))
             }
             Spacer(Modifier.height(24.dp))
         }
@@ -162,13 +168,15 @@ fun AnswerScreen(vm: GameViewModel, day: Int) {
 }
 
 @Composable
-private fun FeedbackBanner(verdict: Verdict, message: String) {
-    val (title, color) = when (verdict) {
-        Verdict.CORRECT -> "Correct !" to FirGreen
-        Verdict.PRESQUE -> "Presque !" to Gold
-        Verdict.TROP_VAGUE -> "Plus précis !" to Gold
-        Verdict.FAUX -> "Raté" to ChristmasRed
+private fun FeedbackBanner(feedback: Feedback) {
+    val (titleRes, color) = when (feedback.verdict) {
+        Verdict.CORRECT -> R.string.feedback_title_correct to FirGreen
+        Verdict.PRESQUE -> R.string.feedback_title_almost to Gold
+        Verdict.TROP_VAGUE -> R.string.feedback_title_too_vague to Gold
+        Verdict.FAUX -> R.string.feedback_title_wrong to ChristmasRed
     }
+    val title = stringResource(titleRes)
+    val message = feedbackMessage(feedback)
     Surface(
         color = color.copy(alpha = 0.12f),
         shape = RoundedCornerShape(12.dp),
@@ -180,5 +188,19 @@ private fun FeedbackBanner(verdict: Verdict, message: String) {
             Spacer(Modifier.height(4.dp))
             Text(message, style = MaterialTheme.typography.bodyLarge, color = Ink)
         }
+    }
+}
+
+@Composable
+private fun feedbackMessage(feedback: Feedback): String {
+    fun pickFrom(list: Array<String>) = list[feedback.pick % list.size]
+    return when (feedback.message) {
+        FeedbackMessage.ALMOST -> pickFrom(stringArrayResource(R.array.feedback_almost))
+        FeedbackMessage.TOO_VAGUE -> pickFrom(stringArrayResource(R.array.feedback_too_vague))
+        FeedbackMessage.WRONG -> pickFrom(stringArrayResource(R.array.feedback_wrong))
+        FeedbackMessage.WRONG_THEN_QCM ->
+            stringResource(R.string.feedback_wrong_then_qcm, pickFrom(stringArrayResource(R.array.feedback_wrong)))
+        FeedbackMessage.WRONG_LAST_CHANCE ->
+            stringResource(R.string.feedback_wrong_last_chance, pickFrom(stringArrayResource(R.array.feedback_wrong)))
     }
 }

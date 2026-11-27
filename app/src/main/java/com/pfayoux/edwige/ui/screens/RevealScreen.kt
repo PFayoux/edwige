@@ -2,8 +2,8 @@ package com.pfayoux.edwige.ui.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.slideInVertically
@@ -28,11 +28,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pfayoux.edwige.GameViewModel
+import com.pfayoux.edwige.R
 import com.pfayoux.edwige.Screen
-import com.pfayoux.edwige.domain.Messages
 import com.pfayoux.edwige.ui.components.Confetti
 import com.pfayoux.edwige.ui.components.Postcard
 import com.pfayoux.edwige.ui.components.SoftNote
@@ -40,18 +42,22 @@ import com.pfayoux.edwige.ui.components.Stars
 import com.pfayoux.edwige.ui.components.Ticket
 import com.pfayoux.edwige.ui.theme.ChristmasRed
 import com.pfayoux.edwige.ui.theme.InkSoft
+import kotlin.random.Random
 
 /** Révélation du cadeau (celebrate = true) ou carte jouée rouverte en lecture seule. */
 @Composable
 fun RevealScreen(vm: GameViewModel, day: Int, celebrate: Boolean) {
     val card = vm.content.card(day)
     val progress = vm.progress(day)
-    val missedMessage = remember(day) { Messages.missed[day % Messages.missed.size] }
-    val correctMessage = remember(day) { Messages.pick(Messages.correct) }
+    val missedMessages = stringArrayResource(R.array.reveal_missed)
+    val missedMessage = missedMessages[day % missedMessages.size]
+    val correctMessages = stringArrayResource(R.array.reveal_correct)
+    val correctPick = remember(day) { Random.nextInt(Int.MAX_VALUE) }
+    val correctMessage = correctMessages[correctPick % correctMessages.size]
     val ticketVisible = remember { MutableTransitionState(!celebrate).apply { targetState = true } }
 
     Box(Modifier.fillMaxSize()) {
-        Scaffold(topBar = { BackTopBar("Carte n° $day") { vm.back() } }) { padding ->
+        Scaffold(topBar = { BackTopBar(stringResource(R.string.card_title, day)) { vm.back() } }) { padding ->
             Column(
                 Modifier
                     .fillMaxSize()
@@ -62,7 +68,7 @@ fun RevealScreen(vm: GameViewModel, day: Int, celebrate: Boolean) {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Text(
-                    "${card.shortPlace} !",
+                    stringResource(R.string.reveal_place_title, card.shortPlace),
                     style = MaterialTheme.typography.displaySmall,
                     color = if (progress.isFound) ChristmasRed else InkSoft,
                     textAlign = TextAlign.Center,
@@ -87,20 +93,20 @@ fun RevealScreen(vm: GameViewModel, day: Int, celebrate: Boolean) {
                     SoftNote(missedMessage)
                 }
 
-                Postcard("Carte n° $day", card.texte)
+                Postcard(stringResource(R.string.card_title, day), card.texte)
 
                 Spacer(Modifier.height(4.dp))
                 Button(
                     onClick = { vm.goHome() },
                     modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
                     shape = RoundedCornerShape(12.dp),
-                ) { Text("Retour au calendrier") }
+                ) { Text(stringResource(R.string.reveal_back_home)) }
                 if (progress.isFound) {
                     OutlinedButton(
                         onClick = { vm.goHome(); vm.navigate(Screen.Tickets) },
                         modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
                         shape = RoundedCornerShape(12.dp),
-                    ) { Text("Voir mes tickets") }
+                    ) { Text(stringResource(R.string.reveal_see_tickets)) }
                 }
                 Spacer(Modifier.height(24.dp))
             }

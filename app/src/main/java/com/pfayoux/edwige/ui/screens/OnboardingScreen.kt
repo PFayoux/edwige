@@ -24,9 +24,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.pfayoux.edwige.GameViewModel
+import com.pfayoux.edwige.R
 import com.pfayoux.edwige.ui.components.Postcard
 import com.pfayoux.edwige.ui.components.Stars
 import com.pfayoux.edwige.ui.theme.ChristmasRed
@@ -52,22 +54,22 @@ fun OnboardingScreen(vm: GameViewModel) {
     ) {
         Stars(3, size = 32.dp)
         Text(
-            vm.content.titre,
+            stringResource(R.string.app_name),
             style = MaterialTheme.typography.headlineLarge,
             color = ChristmasRed,
             textAlign = TextAlign.Center,
         )
         Text(
-            "24 cartes, 24 souvenirs. Pour chacune, retrouve le lieu où la photo a été prise.",
+            stringResource(R.string.onboarding_intro),
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center,
         )
         if (vm.content.regles.isNotBlank()) {
-            Postcard("La règle du jeu", vm.content.regles)
+            Postcard(stringResource(R.string.onboarding_rules_title), vm.content.regles)
         }
         Spacer(Modifier.height(8.dp))
         Text(
-            "Je te préviendrai chaque matin à 9 h quand une nouvelle carte t'attend.",
+            stringResource(R.string.onboarding_reminder_explainer),
             style = MaterialTheme.typography.bodyLarge,
             color = InkSoft,
             textAlign = TextAlign.Center,
@@ -82,9 +84,9 @@ fun OnboardingScreen(vm: GameViewModel) {
             },
             modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
             shape = RoundedCornerShape(12.dp),
-        ) { Text("Oui, préviens-moi !") }
+        ) { Text(stringResource(R.string.onboarding_accept_reminders)) }
         TextButton(onClick = { vm.finishOnboarding(notificationsEnabled = false) }) {
-            Text("Non merci, je viendrai toute seule")
+            Text(stringResource(R.string.onboarding_decline_reminders))
         }
     }
 }

@@ -7,6 +7,8 @@ Spécification : [spec.md](spec.md) · Glossaire : [CONTEXT.md](CONTEXT.md).
 
 - Kotlin + Jetpack Compose, JDK 17, Android 8+ (minSdk 26).
 - Contenu du calendrier : `app/src/main/assets/calendrier_avent.json`.
+- Textes d'interface (boutons, messages, notifications) : `app/src/main/res/values/strings.xml`.
+  Après une modification, régénérer les captures d'écran.
 - Tests : `./gradlew :app:testDebugUnitTest`
 - Captures d'écran (plusieurs téléphones et tailles de police) :
   `./gradlew :app:recordPaparazziDebug`, puis voir `app/src/test/snapshots/images/`.
