@@ -64,9 +64,7 @@ fun OnboardingScreen(vm: GameViewModel) {
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center,
         )
-        if (vm.content.regles.isNotBlank()) {
-            Postcard(stringResource(R.string.onboarding_rules_title), vm.content.regles)
-        }
+        Postcard(stringResource(R.string.onboarding_rules_title), stringResource(R.string.onboarding_rules))
         Spacer(Modifier.height(8.dp))
         Text(
             stringResource(R.string.onboarding_reminder_explainer),

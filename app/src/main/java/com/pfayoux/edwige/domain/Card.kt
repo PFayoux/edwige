@@ -4,10 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-/** Contenu du calendrier, tel qu'écrit dans `calendrier_avent.json`. */
+/** Contenu du calendrier (les 24 cartes), tel qu'écrit dans `calendrier_avent.json`. */
 @Serializable
 data class CalendarContent(
-    val regles: String = "",
     val cartes: List<Card>,
 ) {
     fun card(day: Int): Card = cartes.first { it.jour == day }

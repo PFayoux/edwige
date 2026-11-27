@@ -18,16 +18,19 @@ _À éviter_ : admin
 L'une des 24 étapes du calendrier, identifiée par son jour (1 à 24), avec un texte, un lieu et un cadeau.
 _À éviter_ : case, jour, question
 
+**Enveloppe** :
+L'enveloppe physique que la joueuse ouvre chaque jour et qui contient la carte du jour. Avant d'ouvrir la première, la joueuse ne sait pas qu'il s'agit de retrouver des lieux de photos.
+
 **Lieu** :
 La bonne réponse d'une carte, telle qu'elle est affichée une fois révélée.
 _À éviter_ : réponse, destination
 
 **Contenu du calendrier** :
-Ce que l'organisateur a écrit pour ce calendrier : les 24 cartes et la règle du jeu.
+Ce que l'organisateur a écrit pour ce calendrier : les 24 cartes, et rien d'autre.
 _À éviter_ : données, textes
 
 **Texte d'interface** :
-Tout texte affiché par l'application qui n'est pas du contenu du calendrier : boutons, titres d'écran, messages de réaction, notifications.
+Tout texte affiché par l'application qui n'est pas du contenu du calendrier : boutons, titres d'écran, règle du jeu, messages de réaction, notifications.
 _À éviter_ : libellés, wording
 
 **Réponse acceptée** :
